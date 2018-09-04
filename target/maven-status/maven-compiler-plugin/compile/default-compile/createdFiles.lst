@@ -1,0 +1,10 @@
+com/solehinpower/websocketsolehin/Repository/ChatModelRepository.class
+com/solehinpower/websocketsolehin/Repository/ChatMessageModelRepository.class
+com/solehinpower/websocketsolehin/model/ChatMessage$MessageType.class
+com/solehinpower/websocketsolehin/model/ChatMessageModel.class
+com/solehinpower/websocketsolehin/controller/WebSocketEventListener.class
+com/solehinpower/websocketsolehin/model/ChatMessage.class
+com/solehinpower/websocketsolehin/model/ChatModel.class
+com/solehinpower/websocketsolehin/config/WebSocketConfig.class
+com/solehinpower/websocketsolehin/WebsocketSolehinApplication.class
+com/solehinpower/websocketsolehin/controller/ChatController.class
