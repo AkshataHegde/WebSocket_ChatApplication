@@ -11,6 +11,8 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var username = null;
+var emailId = null;
+var password = null;
 var userTo=null;
 
 var colors = [
@@ -20,6 +22,9 @@ var colors = [
 
 function connect(event) {
     username = document.querySelector('#name').value.trim();
+    emailId = document.querySelector('#emailId').value.trim();
+    password = document.querySelector('#password').value.trim();
+
 
     if(username) {
         usernamePage.classList.add('hidden');
@@ -36,15 +41,19 @@ function connect(event) {
 
 function onConnected() {
     // Subscribe to the Public Topic
-    console.log(stompClient.subscribe('/topic/public', onMessageReceived));
+    stompClient.subscribe('/topic/public', onMessageReceived);
 
     //Subscribe
-    console.log(stompClient.subscribe("/user/"+username+"/message", onMessageReceived));
+    stompClient.subscribe("/user/"+username+"/message", onMessageReceived);
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
         {},
-        JSON.stringify({sender: username, type: 'JOIN'})
+        JSON.stringify({
+        sender: username,
+        emailId:emailId,
+        password:password,
+        type: 'JOIN'})
     )
 
     connectingElement.classList.add('hidden');

@@ -1,6 +1,8 @@
 package com.highpeak.chat.controller;
 
-import com.highpeak.chat.model.ChatMessage;
+import com.highpeak.chat.Bean.ChatMessage;
+import com.highpeak.chat.Repository.UserModelRepository;
+import com.highpeak.chat.model.UserModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -17,6 +19,9 @@ public class ChatController {
     @Autowired
     private SimpMessagingTemplate simpMessagingTemplate;
 
+    @Autowired
+    private UserModelRepository userModelRepository;
+
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
@@ -27,19 +32,30 @@ public class ChatController {
     @SendTo("/topic/public")
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {
-        // Add username in web socket session
+        // Add username in web socket spring.jpa.hibernate.ddl-auto=createsession
+
+        System.out.println("ChatMessage Object  "+chatMessage);
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
+
+        UserModel userModel=new UserModel();
+        userModel.setUserName(chatMessage.getSender());
+        userModel.setUserEmail(chatMessage.getEmailId());
+        userModel.setIsSessionActive(true);
+        userModel.setCreatedAt();
+        userModel.setIsActive(true);
+        userModel.setIsDeleted(false);
+
+        userModelRepository.save(userModel);
 
         return chatMessage;
     }
 
     @MessageMapping("/chat.sendMessageToUser/{user}/message")
-   @SendToUser("/user/{user}/message")
     public void sendMessageToUser(@Payload ChatMessage chatMessage, @DestinationVariable("user") String user) {
 
-        System.out.println("Message "+ chatMessage.getContent());
-        System.out.println("UserName "+ user);
-        simpMessagingTemplate.convertAndSendToUser(user,"/message",chatMessage);
+        System.out.println("Message " + chatMessage.getContent());
+        System.out.println("UserName " + user);
+        simpMessagingTemplate.convertAndSendToUser(user, "/message", chatMessage);
 
     }
 
