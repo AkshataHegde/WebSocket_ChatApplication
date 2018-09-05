@@ -25,6 +25,9 @@ public class UserModel {
     @Column(name = "user_createdAt")
     private Calendar CreatedAt;
 
+    @Column(name = "user_password")
+    private String password;
+
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "frn_u_chat_room_id", referencedColumnName = "chat_room_id")
     private List<ChatRoomModel> chatRoomModelList;

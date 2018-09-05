@@ -3,6 +3,7 @@ package com.highpeak.chat.controller;
 import com.highpeak.chat.Bean.ChatMessage;
 import com.highpeak.chat.Repository.UserModelRepository;
 import com.highpeak.chat.model.UserModel;
+import com.highpeak.chat.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -33,15 +34,16 @@ public class ChatController {
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {
         // Add username in web socket spring.jpa.hibernate.ddl-auto=createsession
-
         System.out.println("ChatMessage Object  "+chatMessage);
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
 
+
+        //storing user details into database
         UserModel userModel=new UserModel();
         userModel.setUserName(chatMessage.getSender());
         userModel.setUserEmail(chatMessage.getEmailId());
         userModel.setIsSessionActive(true);
-        userModel.setCreatedAt();
+        userModel.setCreatedAt(DateUtil.getUTCCalenderInstance(System.currentTimeMillis()));
         userModel.setIsActive(true);
         userModel.setIsDeleted(false);
 

@@ -13,11 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
 
-/**
- * The type Date util.
- *
- * @author Guruprasad A N on 11/1/18
- */
+
 public class DateUtil {
 
     /**
