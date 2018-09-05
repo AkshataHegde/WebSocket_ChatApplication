@@ -1,4 +1,4 @@
-package com.highpeak.chat.Bean;
+package com.highpeak.chat.beans;
 
 
 import lombok.Data;
@@ -16,7 +16,7 @@ public class ChatMessage {
         JOIN,
         LEAVE
     }
-/*
+
     public MessageType getType() {
         return type;
     }
@@ -39,5 +39,21 @@ public class ChatMessage {
 
     public void setSender(String sender) {
         this.sender = sender;
-    }*/
+    }
+
+    public String getEmailId() {
+        return emailId;
+    }
+
+    public void setEmailId(String emailId) {
+        this.emailId = emailId;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 }

@@ -1,4 +1,4 @@
-package com.highpeak.chat.config;
+package com.highpeak.chat.websocket;
 
 
 import org.springframework.context.annotation.Configuration;

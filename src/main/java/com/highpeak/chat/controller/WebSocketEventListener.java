@@ -1,6 +1,6 @@
 package com.highpeak.chat.controller;
 
-import com.highpeak.chat.Bean.ChatMessage;
+import com.highpeak.chat.beans.ChatMessage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

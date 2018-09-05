@@ -1,4 +1,4 @@
-package com.highpeak.chat.Bean;
+package com.highpeak.chat.beans;
 
 import lombok.Data;
 

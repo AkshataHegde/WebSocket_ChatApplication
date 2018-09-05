@@ -1,8 +1,8 @@
 package com.highpeak.chat.controller;
 
-import com.highpeak.chat.Bean.ChatMessage;
-import com.highpeak.chat.Repository.UserModelRepository;
-import com.highpeak.chat.model.UserModel;
+import com.highpeak.chat.beans.ChatMessage;
+import com.highpeak.chat.datastore.Repositories.UserRepository;
+import com.highpeak.chat.datastore.models.UserModel;
 import com.highpeak.chat.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
@@ -11,8 +11,9 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
-import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
+
+import java.sql.Timestamp;
 
 @Controller
 public class ChatController {
@@ -21,7 +22,7 @@ public class ChatController {
     private SimpMessagingTemplate simpMessagingTemplate;
 
     @Autowired
-    private UserModelRepository userModelRepository;
+    private UserRepository userRepository;
 
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
@@ -40,14 +41,13 @@ public class ChatController {
 
         //storing user details into database
         UserModel userModel=new UserModel();
-        userModel.setUserName(chatMessage.getSender());
-        userModel.setUserEmail(chatMessage.getEmailId());
-        userModel.setIsSessionActive(true);
-        userModel.setCreatedAt(DateUtil.getUTCCalenderInstance(System.currentTimeMillis()));
-        userModel.setIsActive(true);
-        userModel.setIsDeleted(false);
+        userModel.setName(chatMessage.getSender());
+        userModel.setEmail(chatMessage.getEmailId());
+        userModel.setSessionActive(true);
+        userModel.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+        userModel.setActive(true);
 
-        userModelRepository.save(userModel);
+        userRepository.save(userModel);
 
         return chatMessage;
     }

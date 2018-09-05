@@ -1,6 +1,6 @@
 package com.highpeak.chat.controller;
 
-import com.highpeak.chat.Bean.UserBean;
+import com.highpeak.chat.beans.UserBean;
 import com.highpeak.chat.exception.DataException;
 import com.highpeak.chat.service.ChatService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +26,8 @@ public class UserController {
         }
     }
 
-    @PostMapping("/group")
-    public String createGroup(@RequestBody List<>)
+//    @PostMapping("/group")
+//    public String createGroup(@RequestBody List<>)
 
 
 

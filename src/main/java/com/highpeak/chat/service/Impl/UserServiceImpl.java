@@ -1,10 +1,10 @@
 package com.highpeak.chat.service.Impl;
 
 
-import com.highpeak.chat.Bean.UserBean;
-import com.highpeak.chat.Repository.UserModelRepository;
+import com.highpeak.chat.beans.UserBean;
+import com.highpeak.chat.datastore.Repositories.UserRepository;
 import com.highpeak.chat.exception.DataException;
-import com.highpeak.chat.model.UserModel;
+import com.highpeak.chat.datastore.models.UserModel;
 import com.highpeak.chat.service.ChatService;
 import com.highpeak.chat.util.DateUtil;
 import com.highpeak.chat.util.NullEmptyUtils;
@@ -14,6 +14,8 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+
+import java.sql.Timestamp;
 
 import static com.highpeak.chat.util.StringConstantUtil.ERROR;
 import static com.highpeak.chat.util.StringConstantUtil.REGISTRATION_FAILED;
@@ -26,7 +28,7 @@ public class UserServiceImpl implements ChatService {
 
 
     @Autowired
-    private UserModelRepository userModelRepository;
+    private UserRepository userRepository;
 
    /* @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;*/
@@ -42,16 +44,15 @@ public class UserServiceImpl implements ChatService {
 
             UserModel userModel=new UserModel();
             userModel.setUserName(userBean.getUserName());
-            userModel.setUserEmail(userBean.getEmailId());
+            userModel.setEmail(userBean.getEmailId());
 
 //          BCryptPasswordEncoder bCryptPasswordEncoder=new BCryptPasswordEncoder();
             userModel.setPassword(userBean.getPassword());
-            userModel.setIsSessionActive(true);
-            userModel.setCreatedAt(DateUtil.getUTCCalenderInstance(System.currentTimeMillis()));
-            userModel.setIsActive(true);
-            userModel.setIsDeleted(false);
+            userModel.setSessionActive(true);
+            userModel.setCreatedDate(new Timestamp(System.currentTimeMillis()));
+            userModel.setActive(true);
 
-            userModelRepository.save(userModel);
+            userRepository.save(userModel);
 
             return YOU_HAVE_SUCCESSFULLY_REGISTERED_AND_LOGGED_IN;
         }
