@@ -16,4 +16,8 @@ public class StringConstantUtil {
 
     public static final String YOU_HAVE_SUCCESSFULLY_REGISTERED_AND_LOGGED_IN="You have successfully registered and logged in.";
 
+    public static final String GROUP_HAS_BEEN_CREATED_SUCCESSFULLY="Group has been created successfully.";
+
+    public static final String SOMETHING_WENT_WRONG_WHILE_CREATING_CHAT_ROOM="Something went wrong while creating chat room";
+
 }

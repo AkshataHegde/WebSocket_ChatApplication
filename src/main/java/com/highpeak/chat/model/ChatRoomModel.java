@@ -23,9 +23,9 @@ public class ChatRoomModel {
     @Column(name = "chat_room_created_at")
     private Calendar createdAt;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+    /*@ManyToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "frn_cr_user_id", referencedColumnName = "user_id")
-    private List<UserModel> userModelList;
+    private List<UserModel> userModelList;*/
 
     @Column(name = "chat_room_is_active")
     private Boolean isActive;

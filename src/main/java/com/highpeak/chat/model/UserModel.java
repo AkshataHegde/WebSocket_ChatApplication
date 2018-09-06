@@ -28,9 +28,9 @@ public class UserModel {
     @Column(name = "user_password")
     private String password;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
+  /*  @ManyToMany(cascade = {CascadeType.ALL})
     @JoinColumn(name = "frn_u_chat_room_id", referencedColumnName = "chat_room_id")
-    private List<ChatRoomModel> chatRoomModelList;
+    private List<ChatRoomModel> chatRoomModelList;*/
 
     @Column(name = "user_is_session_active")
     private Boolean isSessionActive;
