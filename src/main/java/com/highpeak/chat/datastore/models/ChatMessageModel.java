@@ -1,23 +1,20 @@
 package com.highpeak.chat.datastore.models;
 
-
-import lombok.Data;
-
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 @Entity
-@Data
 @Table(name = "chat_message")
 public class ChatMessageModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "cm_id")
-    private Long id;
+    private BigInteger id;
 
     @Column(name = "cm_sender")
-    private Long sender;
+    private BigInteger sender;
 
     @Column(name = "cm_content")
     private String content;
@@ -26,11 +23,67 @@ public class ChatMessageModel {
     private String type;
 
     @Column(name = "cm_cr_id")
-    private Long chatRoomId;
+    private BigInteger chatRoomId;
 
     @Column(name = "cm_created_date")
     private Timestamp createdDate;
 
     @Column(name = "cm_is_deleted")
-    private Boolean isDeleted;
+    private boolean isDeleted;
+
+    public BigInteger getId() {
+        return id;
+    }
+
+    public void setId(BigInteger id) {
+        this.id = id;
+    }
+
+    public BigInteger getSender() {
+        return sender;
+    }
+
+    public void setSender(BigInteger sender) {
+        this.sender = sender;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public BigInteger getChatRoomId() {
+        return chatRoomId;
+    }
+
+    public void setChatRoomId(BigInteger chatRoomId) {
+        this.chatRoomId = chatRoomId;
+    }
+
+    public Timestamp getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(Timestamp createdDate) {
+        this.createdDate = createdDate;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 }

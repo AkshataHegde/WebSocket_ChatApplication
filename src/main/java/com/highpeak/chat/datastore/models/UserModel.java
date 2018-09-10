@@ -1,19 +1,17 @@
 package com.highpeak.chat.datastore.models;
 
-import lombok.Data;
-
 import javax.persistence.*;
+import java.math.BigInteger;
 import java.sql.Timestamp;
 
 @Entity
-@Data
 @Table(name = "user")
 public class UserModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "u_id")
-    private Long id;
+    private BigInteger id;
 
     @Column(name = "u_name")
     private String name;
@@ -30,7 +28,7 @@ public class UserModel {
     @Column(name = "u_password")
     private String password;
 
-    @Column(name = "u_createdDate")
+    @Column(name = "u_created_date")
     private Timestamp createdDate;
 
     @Column(name = "u_is_session_active")
@@ -39,11 +37,11 @@ public class UserModel {
     @Column(name = "u_is_active")
     private boolean isActive;
 
-    public Long getId() {
+    public BigInteger getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(BigInteger id) {
         this.id = id;
     }
 
